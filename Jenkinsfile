@@ -13,7 +13,8 @@ pipeline {
             }
         }
         stage('compress build'){
-            steps{                
+            steps{        
+                sh "cd ${WORKSPACE}"        
                 sh "tar -zcvf ./build build.tar"
             }
         }
