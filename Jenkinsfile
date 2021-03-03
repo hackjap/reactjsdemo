@@ -12,5 +12,10 @@ pipeline {
                 sh "npm run build"
             }
         }
+        stage('compress build'){
+            steps{                
+                sh "tar -zcvf ./build build.tar"
+            }
+        }
     }
 }
