@@ -15,7 +15,7 @@ pipeline {
                 sh "npm run build"
             }
         }
-        stage('compress build'){
+        stage('compress build files'){
             steps{        
                 sh "cd ${WORKSPACE}"        
                 sh "tar -zcvf build.tar build"
