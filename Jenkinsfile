@@ -21,9 +21,20 @@ pipeline {
                 sh "tar -zcvf build.tar build"
             }
         }
-        stage("docker build"){
+        stage("build dockerfile"){
             steps{
-                sh "docker build -t ${DOCKER_IMAGE_NAME} ."
+                script {
+                    dockerimage = docker.build("${DOCKER_IMAGE_NAME}")
+                }                
+            }
+        }
+        stage('push docker image'){
+            steps{
+                script{
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
+                        dockerimage.push()
+                    }
+                }
             }
         }
     }
