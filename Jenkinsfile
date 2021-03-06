@@ -1,5 +1,6 @@
-def DOCKER_IMAGE_TAG = "dev"
-def DOCKER_IMAGE_NAME = "test-frontend:${DOCKER_IMAGE_TAG}"
+def DOCKER_REGISTRY = "choisunguk"
+def TAG = "dev"
+def DOCKER_IMAGE_NAME = "${DOCKER_REGISTRY}/test-frontend:${TAG}"
 
 pipeline {
     agent any
