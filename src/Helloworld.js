@@ -4,7 +4,7 @@ const Helloworld = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        const url = "http://localhost:8081/hello";
+        const url = "http://my-service.default.svc/hello";
         fetch(url)
             .then((response) => {
                 return response.text()
