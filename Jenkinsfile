@@ -26,7 +26,7 @@ pipeline {
 
                     // build dockerfile
                     docker_imagename = "${DOCKER_REGISTRY}/test-frontend:${version}"
-                    def dockerimage = docker.build("${DOCKER_IMAGE_NAME}")
+                    def dockerimage = docker.build("${docker_imagename}")
 
                     // push docker image
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
