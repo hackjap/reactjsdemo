@@ -9,8 +9,8 @@ pipeline {
         stage("debug"){
             steps{
                 script{
-                    r = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
-                    echo r
+                    version = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
+                    echo version
                 }
                 
 
