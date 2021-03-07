@@ -37,8 +37,12 @@ pipeline {
         stage('get project version'){
             steps{
                 script{
-                    image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' | sort | uniq """, returnStdout:true )
-                    current_version = image_name.split(":")[1].trim()
+                    image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.items[].spec.containers[].image | select(. == "choisunguk/test-frontend:0.1.0")' | sort | uniq """, returnStdout:true )
+                    if(!image_name){
+                        current_version = version
+                    }else{
+                        current_version = image_name.split(":")[1].trim()
+                    }
                 }    
             }
         }
