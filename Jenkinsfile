@@ -39,7 +39,7 @@ pipeline {
                 script{
                     image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.items[].spec.containers[].image | select(. == "choisunguk/test-frontend:0.1.0")' | sort | uniq """, returnStdout:true )
                     if(!image_name){
-                        current_version = version
+                        current_version = ''
                     }else{
                         current_version = image_name.split(":")[1].trim()
                     }
