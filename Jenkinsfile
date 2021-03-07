@@ -50,8 +50,8 @@ pipeline {
             steps{
                 dir ('kubernetes_resource'){
                     script {
-                        def sed_docker_image_name = docker_image_name.replace("/", "\\/")
-                        sh(script:"""sed -i "s/IMAGE_NAME/${sed_docker_image_name}/g" deployment.yaml""")
+                        def sed_docker_imagename = docker_imagename.replace("/", "\\/")
+                        sh(script:"""sed -i "s/IMAGE_NAME/${sed_docker_imagename}/g" deployment.yaml""")
                     }
                 }
             }
