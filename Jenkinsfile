@@ -6,13 +6,9 @@ pipeline {
     agent any
 
     stages {
-        stage('install npm package') {
-            steps {
-                sh "npm install"
-            }
-        }
         stage('build project'){
             steps{
+                sh "npm install"
                 sh "npm run build"
             }
         }
@@ -20,7 +16,7 @@ pipeline {
             steps{
                 script {
                     version = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
-
+                    
                     // compress artifacts
                     sh "tar -zcvf build.tar build"
 
