@@ -11,7 +11,9 @@ pipeline {
                 sh "npm install"
                 sh "npm run build"
                 // compress artifacts
-                sh "tar -zcvf build.tar build"
+                dir('build'){
+                    sh "tar -cvf ../build.tar ./*"
+                }
             }
         }
         stage("build docker image and push"){
