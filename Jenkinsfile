@@ -19,7 +19,7 @@ pipeline {
                 script {
                     version = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
                     println version
-                    
+
                     // build dockerfile
                     docker_imagename = "${DOCKER_REGISTRY}/test-frontend:${version}"
                     def dockerimage = docker.build("${docker_imagename}")
@@ -37,7 +37,7 @@ pipeline {
         stage('get project version'){
             steps{
                 script{
-                    image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' |  """, returnStdout:true )
+                    image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' | sort | uniq """, returnStdout:true )
                     current_version = image_name.split(":")[1].trim()
                 }    
             }
