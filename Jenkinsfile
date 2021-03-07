@@ -42,7 +42,7 @@ pipeline {
         stage('get project version'){
             steps{
                 script{
-                    image_name = result = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' |  """).trim()
+                    current_version = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' |  """).trim()
                 }    
             }
         }
