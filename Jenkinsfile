@@ -19,7 +19,7 @@ pipeline {
         stage("build docker image and push"){
             steps{
                 script {
-                    version = result = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
+                    version = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
 
                     // compress artifacts
                     sh "tar -zcvf build.tar build"
