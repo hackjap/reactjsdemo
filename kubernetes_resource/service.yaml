@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   selector:
-    tier: front-demo
+    app: front-demo
   ports:
     - protocol: TCP
       port: 80
