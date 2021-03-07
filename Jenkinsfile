@@ -19,8 +19,7 @@ pipeline {
         stage("build docker image and push"){
             steps{
                 script {
-                    def image_name = result = sh(script:""" node -pe "require('./package.json').version"  """)
-                    version = image_name.split(":")[1].trim()
+                    version = result = sh(script:""" node -pe "require('./package.json').version"  """).trim()
 
                     // compress artifacts
                     sh "tar -zcvf build.tar build"
@@ -42,7 +41,8 @@ pipeline {
         stage('get project version'){
             steps{
                 script{
-                    current_version = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' |  """).trim()
+                    image_name = sh(script:""" kubectl get po -A -o json | jq --raw-output '.itmes[].spec.containers.image | select(. == "${docker_imagename}")' |  """, returnStdout:true )
+                    current_version = image_name.split(":")[1].trim()
                 }    
             }
         }
