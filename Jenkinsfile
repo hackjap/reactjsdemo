@@ -10,15 +10,14 @@ pipeline {
             steps{
                 sh "npm install"
                 sh "npm run build"
+                // compress artifacts
+                sh "tar -zcvf build.tar build"
             }
         }
         stage("build docker image and push"){
             steps{
                 script {
                     version = sh(script:""" node -pe "require('./package.json').version"  """, returnStdout:true).trim()
-                    
-                    // compress artifacts
-                    sh "tar -zcvf build.tar build"
 
                     // build dockerfile
                     docker_imagename = "${DOCKER_REGISTRY}/test-frontend:${version}"
