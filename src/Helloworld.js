@@ -4,7 +4,7 @@ const Helloworld = () => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
-        const url = "http://localhost/hello";
+        const url = "/hello";
         fetch(url)
             .then((response) => {
                 return response.text()
