@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                nodejs(nodeJSInstallationName: 'Node 14.5.0') {
+                nodejs(nodeJSInstallationName: 'npmsetting') {
                     sh 'npm install && npm run build'
                 }
             }
