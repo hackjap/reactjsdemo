@@ -6,6 +6,12 @@ pipeline {
     agent any
 
     stages {
-        
+        stage('Build') {
+            steps {
+                nodejs(nodeJSInstallationName: 'Node 14.5.0') {
+                    sh 'npm install && npm run build'
+                }
+            }
+        }
     }
 }
